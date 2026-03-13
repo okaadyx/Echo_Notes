@@ -8,6 +8,7 @@ module.exports = function (api) {
         {
           config: './tamagui.config.ts',
           components: ['tamagui'],
+          disableExtraction: true,
         },
       ],
       'react-native-reanimated/plugin',
