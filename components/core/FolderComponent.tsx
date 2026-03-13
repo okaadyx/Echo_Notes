@@ -70,7 +70,7 @@ const FolderComponent = () => {
             </YStack>
           </View>
         )}
-        contentContainerStyle={{ gap: 10, marginBottom: 40 }}
+        contentContainerStyle={{ gap: 10, marginBottom: 20 }}
       />
     </YStack>
   );
