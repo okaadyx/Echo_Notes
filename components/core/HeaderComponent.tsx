@@ -4,7 +4,11 @@ import { Text, View, XStack, YStack } from "tamagui";
 
 const HeaderComponent = () => {
   return (
-    <XStack justifyContent="space-between" alignItems="center">
+    <XStack
+      justifyContent="space-between"
+      alignItems="center"
+      marginBottom={20}
+    >
       <YStack>
         <Text fontSize={20} fontWeight={"bold"}>
           Hello, Aady

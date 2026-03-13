@@ -1,30 +1,14 @@
-import HeaderComponent from "@/components/header/HeaderComponent";
-import { StyleSheet } from "react-native";
+import FolderComponent from "@/components/core/FolderComponent";
+import HeaderComponent from "@/components/core/HeaderComponent";
+import SearchComponent from "@/components/core/SearchComponent";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
   return (
-    <SafeAreaView style={{ padding: 16 }}>
+    <SafeAreaView style={{ padding: 16, gap: 20 }}>
       <HeaderComponent />
+      <SearchComponent />
+      <FolderComponent />
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: "absolute",
-  },
-});
