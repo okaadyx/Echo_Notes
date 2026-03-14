@@ -1,3 +1,4 @@
+import FloatingButton from "@/components/core/FloatingButton";
 import FolderComponent from "@/components/core/FolderComponent";
 import HeaderComponent from "@/components/core/HeaderComponent";
 import SearchComponent from "@/components/core/SearchComponent";
@@ -33,6 +34,7 @@ export default function HomeScreen() {
         <NotesCard />
         <NotesCard />
       </ScrollView>
+      <FloatingButton />
     </SafeAreaView>
   );
 }
