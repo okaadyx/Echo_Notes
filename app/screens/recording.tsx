@@ -1,5 +1,6 @@
 import { Mic, Pause, Play, Square, X } from "@tamagui/lucide-icons";
 import { Audio } from "expo-av";
+import { router } from "expo-router";
 import React, { useEffect, useRef, useState } from "react";
 import Animated, {
   useAnimatedStyle,
@@ -115,6 +116,7 @@ export default function VoiceRecorder() {
       setRecordingActive(false);
       setIsPaused(false);
       setDuration(0);
+      router.push("/screens/analyzing");
     } catch (error) {
       console.log("Stop recording error:", error);
     }
