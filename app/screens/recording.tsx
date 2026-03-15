@@ -109,14 +109,26 @@ export default function VoiceRecorder() {
 
       await recording.stopAndUnloadAsync();
 
-      const uri = recording.getURI();
-      console.log("Recording saved:", uri);
+      const tempUri = recording.getURI();
+      let uri = tempUri;
+
+      if (tempUri) {
+        // Copy out of volatile cache to a stable document directory
+        const FileSystem = require("expo-file-system/legacy");
+        const fileName = `recording-${Date.now()}.m4a`;
+        const newUri = `${FileSystem.documentDirectory}${fileName}`;
+        await FileSystem.copyAsync({
+          from: tempUri,
+          to: newUri,
+        });
+        uri = newUri;
+      }
 
       setRecording(null);
       setRecordingActive(false);
       setIsPaused(false);
       setDuration(0);
-      router.push("/screens/analyzing");
+      router.push({ pathname: "/screens/analyzing", params: { uri } });
     } catch (error) {
       console.log("Stop recording error:", error);
     }

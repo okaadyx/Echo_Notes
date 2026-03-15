@@ -6,7 +6,7 @@ class Api {
   ai: AIApi;
   constructor() {
     this.axiosClient = axios.create({
-      baseURL: "https://echo-notes-phi.vercel.app/",
+      baseURL: "https://echo-notes-phi.vercel.app/api/",
     });
     this.ai = new AIApi(this.axiosClient);
   }

@@ -6,8 +6,6 @@ type Props = {
 };
 
 export default function PreviewComponent({ note, onSave }: Props) {
-  if (!note) return null;
-
   return (
     <YStack padding={16} gap={16}>
       {/* Title */}
