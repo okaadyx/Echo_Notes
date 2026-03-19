@@ -1,8 +1,14 @@
+import { api } from "@/services";
 import { User } from "@tamagui/lucide-icons";
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { Text, XStack, YStack } from "tamagui";
 
 const HeaderComponent = () => {
+  const { data } = useQuery({
+    queryKey: ["user"],
+    queryFn: () => api.user.getUser(),
+  });
   return (
     <XStack
       justifyContent="space-between"
@@ -11,7 +17,7 @@ const HeaderComponent = () => {
     >
       <YStack gap={2}>
         <Text fontSize={26} fontWeight="800" color="$color">
-          Hello, Aady
+          Hello, {data?.name}
         </Text>
         <Text fontSize={15} color="$gray11" fontWeight="500">
           Ready to capture your thoughts?

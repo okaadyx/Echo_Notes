@@ -16,9 +16,8 @@ export class UserApi {
   async getUser() {
     const headers = await this.getAuthHeader();
     const response = await this.client.get("user/", { headers });
-    return response.data;
+    return response.data.data;
   }
-
   async signup(data: any) {
     try {
       const response = await this.client.post("user/signup", data);
