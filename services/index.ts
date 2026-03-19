@@ -8,7 +8,7 @@ class Api {
   user: UserApi;
   constructor() {
     this.axiosClient = axios.create({
-      baseURL: "https://echo-notes-kappa.vercel.app/",
+      baseURL: "https://echo-notes-kappa.vercel.app/api/",
     });
     this.ai = new AIApi(this.axiosClient);
     this.user = new UserApi(this.axiosClient);

@@ -15,13 +15,13 @@ export class UserApi {
 
   async getUser() {
     const headers = await this.getAuthHeader();
-    const response = await this.client.get("/user/", { headers });
+    const response = await this.client.get("user/", { headers });
     return response.data;
   }
 
   async signup(data: any) {
     try {
-      const response = await this.client.post("/user/signup", data);
+      const response = await this.client.post("user/signup", data);
       const user = response.data;
 
       if (user?.status && user?.token) {
@@ -36,7 +36,7 @@ export class UserApi {
   }
   async login(data: any) {
     try {
-      const response = await this.client.post("/user/login", data);
+      const response = await this.client.post("user/login", data);
 
       const user = response.data;
 
@@ -55,7 +55,7 @@ export class UserApi {
     try {
       const headers = await this.getAuthHeader();
 
-      const response = await this.client.put("/user/update", data, {
+      const response = await this.client.put("user/update", data, {
         headers,
       });
 
