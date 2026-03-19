@@ -14,14 +14,9 @@ export class UserApi {
   }
 
   async getUser() {
-    try {
-      const headers = await this.getAuthHeader();
-      const response = await this.client.get("/user/", { headers });
-      return response.data;
-    } catch (error) {
-      console.error("Fetch error:", error);
-      throw error;
-    }
+    const headers = await this.getAuthHeader();
+    const response = await this.client.get("/user/", { headers });
+    return response.data;
   }
 
   async signup(data: any) {

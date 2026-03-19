@@ -1,9 +1,14 @@
+import { AntDesign } from "@expo/vector-icons";
+import { Eye, EyeOff } from "@tamagui/lucide-icons";
 import { LogoIcon } from "@/components/core/LogoIcon";
 import { router } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import { Button, Input, Text, XStack, YStack } from "tamagui";
 
 export default function LoginScreen() {
+  const [email, setEmail] = useState<string | null>(null);
+  const [password, setPassword] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <YStack
       flex={1}
@@ -29,6 +34,7 @@ export default function LoginScreen() {
             placeholderTextColor="$placeholderColor"
             backgroundColor="$gray2"
             borderRadius={12}
+            onChangeText={setEmail}
             height={45}
             borderWidth={1}
             borderColor="$borderColor"
@@ -41,6 +47,7 @@ export default function LoginScreen() {
             Email Address
           </Text>
           <Input
+            value={email || ""}
             placeholder="name@example.com"
             placeholderTextColor="$placeholderColor"
             backgroundColor="$gray2"
@@ -56,29 +63,54 @@ export default function LoginScreen() {
           <Text fontSize={12} color="$gray10">
             Password
           </Text>
-          <Input
-            placeholder="••••••••"
-            placeholderTextColor="$placeholderColor"
-            secureTextEntry
-            backgroundColor="$gray2"
-            borderRadius={12}
-            height={45}
-            borderWidth={1}
-            borderColor="$borderColor"
-            focusStyle={{
-              borderColor: "$blue8",
-            }}
-          />
+          <XStack position="relative" alignItems="center">
+            <Input
+              flex={1}
+              value={password || ""}
+              placeholder="••••••••"
+              placeholderTextColor="$placeholderColor"
+              secureTextEntry={!showPassword}
+              onChangeText={setPassword}
+              backgroundColor="$gray2"
+              borderRadius={12}
+              height={45}
+              paddingRight={45}
+              borderWidth={1}
+              borderColor="$borderColor"
+              focusStyle={{
+                borderColor: "$blue8",
+              }}
+            />
+            <Button
+              position="absolute"
+              right={0}
+              height={45}
+              width={45}
+              backgroundColor="transparent"
+              borderWidth={0}
+              chromeless
+              pressStyle={{ backgroundColor: "transparent", opacity: 0.7 }}
+              onPress={() => setShowPassword(!showPassword)}
+              icon={
+                showPassword ? (
+                  <EyeOff size={20} color="$gray10" />
+                ) : (
+                  <Eye size={20} color="$gray10" />
+                )
+              }
+            />
+          </XStack>
 
           <Button
             marginTop={10}
             height={48}
             borderRadius={14}
             backgroundColor="$blue9"
-            color="white"
             pressStyle={{ scale: 0.97 }}
           >
-            Sign In
+            <Text color="white" fontWeight="600">
+              Sign In
+            </Text>
           </Button>
 
           <XStack
@@ -100,6 +132,7 @@ export default function LoginScreen() {
             borderWidth={1}
             borderColor="$borderColor"
             pressStyle={{ scale: 0.97 }}
+            icon={<AntDesign name="google" size={18} color="$color" />}
           >
             <Text color="$color">Google</Text>
           </Button>
