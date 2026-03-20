@@ -200,6 +200,7 @@ export default function VoiceRecorder() {
             backgroundColor="#222"
             justifyContent="center"
             alignItems="center"
+            onPress={() => router.back()}
           >
             <X size={22} color="white" />
           </Circle>

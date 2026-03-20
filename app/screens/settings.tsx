@@ -1,3 +1,5 @@
+import { queryClient } from "@/lib/QueryClient";
+import { api } from "@/services";
 import {
   Bell,
   ChevronRight,
@@ -6,13 +8,46 @@ import {
   LogOut,
   User,
 } from "@tamagui/lucide-icons";
+import { useQuery } from "@tanstack/react-query";
+import { router } from "expo-router";
+import * as SecureStore from "expo-secure-store";
 import React, { useState } from "react";
+import { ActivityIndicator } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Circle, Separator, Switch, Text, XStack, YStack } from "tamagui";
 
 export default function SettingsScreen() {
   const [notifications, setNotifications] = useState(true);
   const insets = useSafeAreaInsets();
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["user"],
+    queryFn: () => api.user.getUser(),
+  });
+
+  const Logout = async () => {
+    await SecureStore.deleteItemAsync("token");
+    queryClient.invalidateQueries({
+      queryKey: ["token"],
+    });
+    router.replace("/auth/login");
+  };
+
+  if (isLoading) {
+    return (
+      <YStack justifyContent="center" alignItems="center">
+        <ActivityIndicator size={"large"} />
+      </YStack>
+    );
+  }
+
+  if (isError) {
+    return (
+      <YStack justifyContent="center" alignItems="center">
+        <Text color={"red"}>Something Went Wrong</Text>
+      </YStack>
+    );
+  }
 
   return (
     <YStack
@@ -59,11 +94,11 @@ export default function SettingsScreen() {
         </YStack>
 
         <Text marginTop={10} fontSize={18} fontWeight="600" color="$color">
-          Jane Doe
+          {data?.name}
         </Text>
 
         <Text marginTop={4} fontSize={13} color="$gray10">
-          jane.doe@example.com
+          {data?.email}
         </Text>
 
         <YStack
@@ -144,7 +179,12 @@ export default function SettingsScreen() {
 
       {/* Logout */}
       <YStack marginTop={20}>
-        <XStack alignItems="center" gap={10} paddingVertical={12}>
+        <XStack
+          alignItems="center"
+          gap={10}
+          paddingVertical={12}
+          onPress={Logout}
+        >
           <Circle size={36} backgroundColor="$red3">
             <LogOut size={18} color="$red9" />
           </Circle>
