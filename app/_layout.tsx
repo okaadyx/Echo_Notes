@@ -1,3 +1,4 @@
+import { store } from "@/store/store";
 import {
   DarkTheme,
   DefaultTheme,
@@ -12,6 +13,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { queryClient } from "@/lib/QueryClient";
+import { Provider } from "react-redux";
 import { TamaguiProvider } from "tamagui";
 import { config } from "../tamagui.config";
 
@@ -24,28 +26,30 @@ export default function RootLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SafeAreaProvider>
-        <TamaguiProvider
-          config={config}
-          defaultTheme={colorScheme === "dark" ? "dark" : "light"}
-        >
-          <ThemeProvider
-            value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+      <Provider store={store}>
+        <SafeAreaProvider>
+          <TamaguiProvider
+            config={config}
+            defaultTheme={colorScheme === "dark" ? "dark" : "light"}
           >
-            <Stack>
-              <Stack.Screen name="index" options={{ headerShown: false }} />
-              <Stack.Screen name="auth" options={{ headerShown: false }} />
-              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-              <Stack.Screen name="screens" options={{ headerShown: false }} />
-              <Stack.Screen
-                name="modal"
-                options={{ presentation: "modal", title: "Modal" }}
-              />
-            </Stack>
-            <StatusBar style="auto" />
-          </ThemeProvider>
-        </TamaguiProvider>
-      </SafeAreaProvider>
+            <ThemeProvider
+              value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+            >
+              <Stack>
+                <Stack.Screen name="index" options={{ headerShown: false }} />
+                <Stack.Screen name="auth" options={{ headerShown: false }} />
+                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                <Stack.Screen name="screens" options={{ headerShown: false }} />
+                <Stack.Screen
+                  name="modal"
+                  options={{ presentation: "modal", title: "Modal" }}
+                />
+              </Stack>
+              <StatusBar style="auto" />
+            </ThemeProvider>
+          </TamaguiProvider>
+        </SafeAreaProvider>
+      </Provider>
     </QueryClientProvider>
   );
 }
