@@ -1,3 +1,4 @@
+import { formatTimeAgo } from "@/lib/dateUtils";
 import { Mic } from "@tamagui/lucide-icons";
 import { router } from "expo-router";
 import React from "react";
@@ -7,7 +8,7 @@ interface Note {
   id: string;
   title: string;
   type?: string;
-  date?: string;
+  created_at?: string;
 }
 
 interface NotesCardProps {
@@ -56,7 +57,7 @@ const NotesCard = ({ item }: NotesCardProps) => {
         </YStack>
       </XStack>
 
-      <Text color="$color05">{item.date ?? "Yesterday"}</Text>
+      <Text color="$color05">{formatTimeAgo(item.created_at)}</Text>
     </XStack>
   );
 };

@@ -18,7 +18,23 @@ export default function HomeScreen() {
     queryFn: () => api.notes.getNotes(),
   });
 
-  const pinnedData = data.filter((item: any) => item.is_favorite === true);
+  const sortedData = React.useMemo(() => {
+    return [...data].sort((a: any, b: any) => {
+      const dateA = a.created_at ? new Date(a.created_at).getTime() : 0;
+      const dateB = b.created_at ? new Date(b.created_at).getTime() : 0;
+      return dateB - dateA;
+    });
+  }, [data]);
+
+  const pinnedData = React.useMemo(() => {
+    return data
+      .filter((item: any) => item.is_favorite === true)
+      .sort((a: any, b: any) => {
+        const dateA = a.updated_at ? new Date(a.updated_at).getTime() : 0;
+        const dateB = b.updated_at ? new Date(b.updated_at).getTime() : 0;
+        return dateB - dateA;
+      });
+  }, [data]);
 
   const hasPinned = pinnedData.length > 0;
   const starColor = hasPinned ? "$violet10" : "$gray8";
@@ -56,8 +72,8 @@ export default function HomeScreen() {
 
           {isLoading ? (
             <ActivityIndicator size={"large"} color={"$blue10"} />
-          ) : data.length !== 0 ? (
-            data.map((item: any) => <NotesCard key={item.id} item={item} />)
+          ) : sortedData.length !== 0 ? (
+            sortedData.map((item: any) => <NotesCard key={item.id} item={item} />)
           ) : (
             <XStack justifyContent="center" gap={10}>
               <ActivityIndicator size={"small"} color={"$blue10"} />
