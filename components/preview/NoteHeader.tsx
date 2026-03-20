@@ -5,7 +5,7 @@ interface Props {
   title?: string;
   pinIcon?: boolean;
   isPinned?: boolean;
-  handlePinNote: () => void;
+  handlePinNote?: () => void;
 }
 export const NoteHeader = ({
   title,
