@@ -5,7 +5,7 @@ interface KeyPointsProps {
   points?: string[];
 }
 
-export const KeyPoints = ({ points = [] }: KeyPointsProps) => {
+const KeyPoints = ({ points = [] }: KeyPointsProps) => {
   return (
     <YStack gap={16}>
       <XStack alignItems="center" gap={8}>
@@ -39,3 +39,5 @@ export const KeyPoints = ({ points = [] }: KeyPointsProps) => {
     </YStack>
   );
 };
+
+export default KeyPoints;

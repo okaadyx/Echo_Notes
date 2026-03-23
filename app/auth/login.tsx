@@ -1,4 +1,4 @@
-import { LogoIcon } from "@/components/core/LogoIcon";
+import { LogoIcon } from "@/components/layout";
 import { api } from "@/services";
 import { AntDesign } from "@expo/vector-icons";
 import { Eye, EyeOff } from "@tamagui/lucide-icons";
@@ -29,9 +29,8 @@ export default function LoginScreen() {
         setError(user.message || "Login failed");
         return;
       }
-      console.log("Login successful", user);
-      router.replace("/(tabs)");
-    } catch (err) {
+      router.replace("/(tabs)/explore");
+    } catch (error: any) {
       setError("Something went wrong. Please try again.");
     } finally {
       setIsLoading(false);

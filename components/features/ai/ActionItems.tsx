@@ -5,7 +5,7 @@ interface ActionItemsProps {
   items?: string[];
 }
 
-export const ActionItems = ({ items = [] }: ActionItemsProps) => {
+const ActionItems = ({ items = [] }: ActionItemsProps) => {
   return (
     <YStack gap={16}>
       <XStack alignItems="center" gap={8}>
@@ -55,3 +55,5 @@ export const ActionItems = ({ items = [] }: ActionItemsProps) => {
     </YStack>
   );
 };
+
+export default ActionItems;

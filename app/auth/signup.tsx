@@ -1,6 +1,6 @@
 import { AntDesign } from "@expo/vector-icons";
 import { Eye, EyeOff } from "@tamagui/lucide-icons";
-import { LogoIcon } from "@/components/core/LogoIcon";
+import { LogoIcon } from "@/components/layout";
 import { api } from "@/services";
 import { router } from "expo-router";
 import React, { useState } from "react";
@@ -31,7 +31,6 @@ export default function SignupScreen() {
         setError(response.message || "Signup failed");
         return;
       }
-      console.log("Signup successful", response);
       router.replace("/(tabs)");
     } catch (err) {
       setError("Something went wrong. Please try again.");

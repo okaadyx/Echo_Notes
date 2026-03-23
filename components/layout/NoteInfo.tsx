@@ -6,7 +6,7 @@ interface NoteInfoProps {
   tags?: string[];
 }
 
-export const NoteInfo = ({ title, tags = [] }: NoteInfoProps) => (
+const NoteInfo = ({ title, tags = [] }: NoteInfoProps) => (
   <YStack gap={24}>
     <YStack gap={8}>
       <H3 fontWeight="800" color="$color" lineHeight={32}>
@@ -77,3 +77,5 @@ export const NoteInfo = ({ title, tags = [] }: NoteInfoProps) => (
     </XStack>
   </YStack>
 );
+
+export default NoteInfo;

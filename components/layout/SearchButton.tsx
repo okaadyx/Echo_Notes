@@ -3,7 +3,7 @@ import { router } from "expo-router";
 import React from "react";
 import { Input, XStack } from "tamagui";
 
-const SearchComponent = () => {
+const SearchButton = () => {
   return (
     <XStack
       borderWidth={1}
@@ -38,4 +38,4 @@ const SearchComponent = () => {
   );
 };
 
-export default SearchComponent;
+export default SearchButton;

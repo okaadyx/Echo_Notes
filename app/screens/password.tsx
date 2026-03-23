@@ -38,8 +38,7 @@ export default function ChangePasswordScreen() {
       ToastAndroid.show("Password Updated Successfully", ToastAndroid.SHORT);
       setPassword("");
       setConfirmPassword("");
-    } catch (error) {
-      console.log("Update Error:", error);
+    } catch (error: any) {
       Alert.alert("Error", "Failed to update password.");
     } finally {
       setIsUpdating(false);
@@ -74,8 +73,6 @@ export default function ChangePasswordScreen() {
           fontSize={12}
           color="$gray10"
           marginBottom={6}
-          value={confirmPassword}
-          setValue={setConfirmPassword}
         >
           Confirm New Password
         </Text>

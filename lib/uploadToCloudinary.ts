@@ -23,7 +23,6 @@ const uploadToCloudinary = async (imageUri: any) => {
   );
 
   const result = await response.json();
-  console.log("Cloudinary Response", result);
   return result.secure_url;
 };
 

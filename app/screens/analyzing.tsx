@@ -1,5 +1,4 @@
-import AnalyzingComponent from "@/components/AnalyzingComponent";
-import PreviewComponent from "@/components/PreviewComponent";
+import { AnalyzingComponent, PreviewComponent } from "@/components/features/ai";
 import { api } from "@/services";
 import { useQuery } from "@tanstack/react-query";
 import { router, useLocalSearchParams } from "expo-router";

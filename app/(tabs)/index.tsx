@@ -1,40 +1,32 @@
-import FloatingButton from "@/components/core/FloatingButton";
-import FolderComponent from "@/components/core/FolderComponent";
-import HeaderComponent from "@/components/core/HeaderComponent";
-import SearchComponent from "@/components/core/SearchComponent";
-import NotesCard from "@/components/NotesCard";
-import PinnedCard from "@/components/PinnedCard";
-import { api } from "@/services";
+import { FloatingButton, HeaderComponent, SearchButton } from "@/components/layout";
+import { FolderComponent, NotesCard, PinnedCard } from "@/components/features/notes";
 import { StarFull } from "@tamagui/lucide-icons";
-import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { ActivityIndicator, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Text, XStack, YStack } from "tamagui";
+import { useNotes } from "@/hooks/use-notes";
 
 export default function HomeScreen() {
-  const { data = [], isLoading } = useQuery({
-    queryKey: ["notes"],
-    queryFn: () => api.notes.getNotes(),
-  });
+  const { notes, isLoading } = useNotes();
 
   const sortedData = React.useMemo(() => {
-    return [...data].sort((a: any, b: any) => {
+    return [...notes].sort((a: any, b: any) => {
       const dateA = a.created_at ? new Date(a.created_at).getTime() : 0;
       const dateB = b.created_at ? new Date(b.created_at).getTime() : 0;
       return dateB - dateA;
     });
-  }, [data]);
+  }, [notes]);
 
   const pinnedData = React.useMemo(() => {
-    return data
+    return notes
       .filter((item: any) => item.is_favorite === true)
       .sort((a: any, b: any) => {
         const dateA = a.updated_at ? new Date(a.updated_at).getTime() : 0;
         const dateB = b.updated_at ? new Date(b.updated_at).getTime() : 0;
         return dateB - dateA;
       });
-  }, [data]);
+  }, [notes]);
 
   const hasPinned = pinnedData.length > 0;
   const starColor = hasPinned ? "$violet10" : "$gray8";
@@ -44,7 +36,7 @@ export default function HomeScreen() {
       <SafeAreaView style={{ flex: 1 }}>
         <ScrollView contentContainerStyle={{ padding: 16, gap: 10 }}>
           <HeaderComponent />
-          <SearchComponent />
+          <SearchButton />
           <FolderComponent />
 
           {hasPinned && (

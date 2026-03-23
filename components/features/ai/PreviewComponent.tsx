@@ -1,14 +1,11 @@
 import React from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button, ScrollView, Text, YStack } from "tamagui";
-import {
-  AISummary,
-  ActionItems,
-  AudioPlayer,
-  KeyPoints,
-  NoteHeader,
-  NoteInfo,
-} from "./preview";
+import AISummary from "./AISummary";
+import ActionItems from "./ActionItems";
+import AudioPlayer from "./AudioPlayer";
+import KeyPoints from "./KeyPoints";
+import { NoteHeader, NoteInfo } from "@/components/layout";
 
 type Props = {
   note: {

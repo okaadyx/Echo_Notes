@@ -1,12 +1,12 @@
 import { Mic, Pause, Play, SkipBack, SkipForward } from "@tamagui/lucide-icons";
 import { Button, Card, Text, XStack, YStack } from "tamagui";
-import { useAudioPlayer } from "../../hooks/use-audio-player";
+import { useAudioPlayer } from "@/hooks/use-audio-player";
 
 interface AudioPlayerProps {
   uri?: string;
 }
 
-export const AudioPlayer = ({ uri }: AudioPlayerProps) => {
+const AudioPlayer = ({ uri }: AudioPlayerProps) => {
   const {
     isPlaying,
     position,
@@ -99,3 +99,5 @@ export const AudioPlayer = ({ uri }: AudioPlayerProps) => {
     </YStack>
   );
 };
+
+export default AudioPlayer;

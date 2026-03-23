@@ -10,7 +10,7 @@ class Api {
   notes: NotesApi;
   constructor() {
     this.axiosClient = axios.create({
-      baseURL: "https://echo-notes-kappa.vercel.app/api/",
+      baseURL: process.env.EXPO_PUBLIC_API_URL,
     });
     this.ai = new AIApi(this.axiosClient);
     this.user = new UserApi(this.axiosClient);

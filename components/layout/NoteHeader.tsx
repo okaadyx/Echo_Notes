@@ -1,4 +1,4 @@
-import { ChevronLeft, MoreVertical, Pin, Share2 } from "@tamagui/lucide-icons";
+import { ChevronLeft, MoreVertical, Pin, Share2, Trash2 } from "@tamagui/lucide-icons";
 import { Text, XStack } from "tamagui";
 
 interface Props {
@@ -6,12 +6,15 @@ interface Props {
   pinIcon?: boolean;
   isPinned?: boolean;
   handlePinNote?: () => void;
+  onDelete?: () => void;
 }
-export const NoteHeader = ({
+
+const NoteHeader = ({
   title,
   pinIcon,
   handlePinNote,
   isPinned,
+  onDelete,
 }: Props) => (
   <XStack
     paddingHorizontal={16}
@@ -39,6 +42,15 @@ export const NoteHeader = ({
       ) : (
         <MoreVertical size={20} color="$color" />
       )}
+      {onDelete && (
+        <Trash2 
+          size={20} 
+          color="$red10" 
+          onPress={onDelete} 
+        />
+      )}
     </XStack>
   </XStack>
 );
+
+export default NoteHeader;

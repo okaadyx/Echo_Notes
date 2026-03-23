@@ -5,7 +5,7 @@ interface AISummaryProps {
   summary?: string;
 }
 
-export const AISummary = ({ summary }: AISummaryProps) => (
+const AISummary = ({ summary }: AISummaryProps) => (
   <Card backgroundColor="$blue2" padding={16} borderRadius={20} borderWidth={0}>
     <YStack gap={12}>
       <XStack alignItems="center" gap={8}>
@@ -22,3 +22,4 @@ export const AISummary = ({ summary }: AISummaryProps) => (
     </YStack>
   </Card>
 );
+export default AISummary;

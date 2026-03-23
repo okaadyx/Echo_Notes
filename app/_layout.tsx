@@ -14,7 +14,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useColorScheme } from "@/hooks/use-color-scheme";
 import { queryClient } from "@/lib/QueryClient";
 import { Provider } from "react-redux";
-import { TamaguiProvider } from "tamagui";
+import { TamaguiProvider, PortalProvider } from "tamagui";
 import { config } from "../tamagui.config";
 
 export const unstable_settings = {
@@ -32,22 +32,24 @@ export default function RootLayout() {
             config={config}
             defaultTheme={colorScheme === "dark" ? "dark" : "light"}
           >
-            <ThemeProvider
-              value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-            >
-              <Stack>
-                <Stack.Screen name="index" options={{ headerShown: false }} />
-                <Stack.Screen name="auth" options={{ headerShown: false }} />
-                <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-                <Stack.Screen name="screens" options={{ headerShown: false }} />
-                <Stack.Screen name="notes" options={{ headerShown: false }} />
-                <Stack.Screen
-                  name="modal"
-                  options={{ presentation: "modal", title: "Modal" }}
-                />
-              </Stack>
-              <StatusBar style="auto" />
-            </ThemeProvider>
+            <PortalProvider>
+              <ThemeProvider
+                value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+              >
+                <Stack>
+                  <Stack.Screen name="index" options={{ headerShown: false }} />
+                  <Stack.Screen name="auth" options={{ headerShown: false }} />
+                  <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+                  <Stack.Screen name="screens" options={{ headerShown: false }} />
+                  <Stack.Screen name="notes" options={{ headerShown: false }} />
+                  <Stack.Screen
+                    name="modal"
+                    options={{ presentation: "modal", title: "Modal" }}
+                  />
+                </Stack>
+                <StatusBar style="auto" />
+              </ThemeProvider>
+            </PortalProvider>
           </TamaguiProvider>
         </SafeAreaProvider>
       </Provider>

@@ -1,45 +1,79 @@
-import {
-  AISummary,
-  ActionItems,
-  KeyPoints,
-  NoteHeader,
-  NoteInfo,
-} from "@/components/preview";
+import { AISummary, ActionItems, KeyPoints } from "@/components/features/ai";
+import { NoteHeader, NoteInfo } from "@/components/layout";
 import { api } from "@/services";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, router } from "expo-router";
 import React from "react";
-import { ActivityIndicator, Platform, ToastAndroid } from "react-native";
+import { ActivityIndicator, Platform, ToastAndroid, Alert } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ScrollView, Text, YStack } from "tamagui";
+import FolderSelector from "@/components/features/notes/FolderSelector";
 
 export default function PreviewComponent() {
   const insets = useSafeAreaInsets();
   const { id } = useLocalSearchParams();
+  const queryClient = useQueryClient();
+
   const { data, isLoading, isError } = useQuery({
     queryKey: ["note", id],
     queryFn: () => api.notes.getNote(Number(id)),
   });
-  const queryClient = useQueryClient();
 
   const handlePinnedNotes = async () => {
     try {
       const response = await api.notes.pinToggle(Number(id));
-
-      // Invalidate queries to refresh UI
       queryClient.invalidateQueries({ queryKey: ["note", id] });
       queryClient.invalidateQueries({ queryKey: ["notes"] });
+      queryClient.invalidateQueries({ queryKey: ["folders"] });
 
       if (Platform.OS === "android") {
-        ToastAndroid.showWithGravity(
-          response?.message || "Success",
-          ToastAndroid.SHORT,
-          ToastAndroid.CENTER,
-        );
+        ToastAndroid.show(response?.message || "Success", ToastAndroid.SHORT);
       }
     } catch (error) {
       console.error("Error toggling pin:", error);
     }
+  };
+
+  const handleFolderUpdate = async (folderId: number) => {
+    try {
+      await api.notes.updateNote(Number(id), {
+        folder_id: folderId,
+      });
+
+      queryClient.invalidateQueries({ queryKey: ["note", id] });
+      queryClient.invalidateQueries({ queryKey: ["notes"] });
+      queryClient.invalidateQueries({ queryKey: ["folders"] });
+
+      if (Platform.OS === "android") {
+        ToastAndroid.show("Moved successfully", ToastAndroid.SHORT);
+      }
+    } catch (error) {
+      console.error("Error updating folder:", error);
+    }
+  };
+
+  const handleDeleteNote = async () => {
+    Alert.alert(
+      "Delete Note",
+      "Are you sure you want to delete this note?",
+      [
+        { text: "Cancel", style: "cancel" },
+        {
+          text: "Delete",
+          style: "destructive",
+          onPress: async () => {
+            try {
+              await api.notes.deleteNote(Number(id));
+              queryClient.invalidateQueries({ queryKey: ["notes"] });
+              queryClient.invalidateQueries({ queryKey: ["folders"] });
+              router.back();
+            } catch (error) {
+              console.error("Error deleting note:", error);
+            }
+          },
+        },
+      ]
+    );
   };
 
   if (isLoading) {
@@ -57,18 +91,28 @@ export default function PreviewComponent() {
       </YStack>
     );
   }
+
+  const activeFolderId = data.folder?.id || null;
+
   return (
     <YStack flex={1} backgroundColor="$background" paddingTop={insets.top}>
       <NoteHeader
         title="Note Detail"
-        pinIcon={true} // Keep true to show the pin icon, but icon inside NoteHeader should reflect state
+        pinIcon={true}
         handlePinNote={handlePinnedNotes}
-        isPinned={data.is_favorite ? true : false}
+        isPinned={!!data.is_favorite}
+        onDelete={handleDeleteNote}
       />
 
       <ScrollView flex={1}>
-        <YStack padding={20} gap={24}>
+        <YStack padding={20} gap={24} paddingBottom={40}>
           <NoteInfo title={data.title} tags={data.tags} />
+
+          <FolderSelector
+            label="Location (Folder)"
+            activeFolderId={activeFolderId}
+            onSelectFolder={handleFolderUpdate}
+          />
 
           <AISummary summary={data.summary} />
 

@@ -97,8 +97,7 @@ export default function ProfileScreen() {
       });
 
       ToastAndroid.show("Profile Updated Successfully", ToastAndroid.SHORT);
-    } catch (error) {
-      console.log("Update Error:", error);
+    } catch (error: any) {
       Alert.alert("Error", "Failed to update profile.");
     } finally {
       setIsUpdating(false);

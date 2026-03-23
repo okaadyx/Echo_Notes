@@ -17,6 +17,7 @@ export default function VoiceRecorder() {
   const [duration, setDuration] = useState(0);
   const [recordingActive, setRecordingActive] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const timerRef = useRef<any>(null);
   const waveRef = useRef<any>(null);
@@ -63,13 +64,15 @@ export default function VoiceRecorder() {
         setDuration((prev) => prev + 1);
       }, 1000);
 
+      setError(null); // Clear any previous errors
+
       waveRef.current = setInterval(() => {
         waveform.forEach((bar) => {
           bar.value = withTiming(Math.random() * 70 + 10, { duration: 180 });
         });
       }, 200);
     } catch (error) {
-      console.log("Start recording error:", error);
+      setError("Failed to start recording");
     }
   };
 
@@ -128,9 +131,10 @@ export default function VoiceRecorder() {
       setRecordingActive(false);
       setIsPaused(false);
       setDuration(0);
+      setError(null); // Clear any previous errors
       router.push({ pathname: "/screens/analyzing", params: { uri } });
     } catch (error) {
-      console.log("Stop recording error:", error);
+      setError("Failed to stop recording");
     }
   };
 

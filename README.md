@@ -1,50 +1,37 @@
-# Welcome to your Expo app 👋
+# EchoNotes Frontend 👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+AI-powered voice note-taking application built with React Native (Expo) and Tamagui.
 
-## Get started
+## Architecture
 
-1. Install dependencies
+The project uses a production-grade, feature-based directory structure:
 
+- `app/`: Expo Router tabs and screens.
+- `components/features/`: Complex components grouped by feature (notes, ai).
+- `components/layout/`: Global UI elements like headers and logos.
+- `components/ui/`: Reusable primitive components.
+- `hooks/`: Domain-specific custom hooks (useNotes, etc.).
+- `services/`: API client and external integrations.
+- `store/`: Redux Toolkit for global state management.
+
+## Getting Started
+
+1. Install dependencies:
    ```bash
    npm install
    ```
 
-2. Start the app
+2. Set up environment variables:
+   Create a `.env` file with `EXPO_PUBLIC_API_URL`.
 
+3. Start the app:
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Key Technologies
+- **React Native (Expo)**: Framework for cross-platform development.
+- **Tamagui**: Design system and UI kit.
+- **TanStack Query (v5)**: Data fetching and caching.
+- **Redux Toolkit**: Client-side state management.
+- **Lucide Icons**: Icon library.

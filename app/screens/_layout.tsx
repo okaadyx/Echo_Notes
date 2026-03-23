@@ -1,4 +1,4 @@
-import SearchComponent from "@/components/header/SearchComponent";
+import SearchInput from "@/components/layout/SearchInput";
 import { Stack } from "expo-router";
 
 export default function ScreenLayout() {
@@ -13,10 +13,15 @@ export default function ScreenLayout() {
       />
       <Stack.Screen name="security" options={{ title: "Security" }} />
       <Stack.Screen name="password" options={{ title: "Change Password" }} />
+      <Stack.Screen name="new-note" options={{ title: "New Note", headerShown: false }} />
+      <Stack.Screen
+        name="delete-account"
+        options={{ title: "Account Deletion" }}
+      />
       <Stack.Screen
         name="search"
         options={{
-          headerTitle: () => <SearchComponent />,
+          headerTitle: () => <SearchInput />,
         }}
       />
     </Stack>

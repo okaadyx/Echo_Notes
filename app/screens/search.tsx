@@ -1,4 +1,4 @@
-import NotesCard from "@/components/NotesCard";
+import NotesCard from "@/components/features/notes/NotesCard";
 import { api } from "@/services";
 import { Search } from "@tamagui/lucide-icons";
 import { useQuery } from "@tanstack/react-query";

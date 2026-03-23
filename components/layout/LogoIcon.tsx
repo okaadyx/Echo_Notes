@@ -5,7 +5,7 @@ interface Props {
   tag: string;
 }
 
-export const LogoIcon = ({ tag }: Props) => {
+const LogoIcon = ({ tag }: Props) => {
   return (
     <YStack alignItems="center" marginBottom={30}>
       <YStack
@@ -41,3 +41,5 @@ export const LogoIcon = ({ tag }: Props) => {
     </YStack>
   );
 };
+
+export default LogoIcon;

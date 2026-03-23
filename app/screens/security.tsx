@@ -112,6 +112,7 @@ export default function SecurityScreen() {
           padding={16}
           borderRadius={16}
           backgroundColor="$red2"
+          onPress={() => router.push("/screens/delete-account")}
         >
           <XStack alignItems="center" gap={10}>
             <AlertTriangle color="$red9" />

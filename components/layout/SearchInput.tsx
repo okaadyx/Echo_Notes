@@ -2,7 +2,7 @@ import { setQuery } from "@/store/querySlice";
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Input, XStack } from "tamagui";
-const SearchComponent = () => {
+const SearchInput = () => {
   const inputRef = useRef<any>(null);
   const dispatch = useDispatch();
   const query = useSelector((state: any) => state.query.query);
@@ -35,4 +35,4 @@ const SearchComponent = () => {
   );
 };
 
-export default SearchComponent;
+export default SearchInput;
