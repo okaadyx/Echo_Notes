@@ -1,4 +1,5 @@
 import { AnalyzingComponent, PreviewComponent } from "@/components/features/ai";
+import { queryClient } from "@/lib/QueryClient";
 import { api } from "@/services";
 import { useQuery } from "@tanstack/react-query";
 import { router, useLocalSearchParams } from "expo-router";
@@ -26,6 +27,9 @@ export default function analyzing() {
         ToastAndroid.SHORT,
         ToastAndroid.CENTER,
       );
+      queryClient.invalidateQueries({
+        queryKey: ["notes"],
+      });
     } else {
       ToastAndroid.showWithGravity(
         "Something went Wrong",
@@ -58,7 +62,8 @@ export default function analyzing() {
           Analysis Failed
         </Text>
         <Text color="$color05" textAlign="center" marginBottom={24}>
-          {(error as any)?.message ||
+          {(error as any)?.response?.data?.message ||
+            (error as any)?.message ||
             "An unexpected error occurred while analyzing the audio."}
         </Text>
         <Button backgroundColor="$blue10" onPress={() => router.back()}>
