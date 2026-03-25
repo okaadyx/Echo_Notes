@@ -22,7 +22,7 @@ export default function SecurityScreen() {
   const [twoFA, setTwoFA] = useState(false);
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "$background" }}>
+    <ScrollView style={{ flex: 1, backgroundColor: "$background" }} showsVerticalScrollIndicator={false}>
       <YStack flex={1} padding={16} marginBottom={80}>
         <Text fontSize={13} color="$gray10">
           Manage your account protection and privacy preferences
@@ -50,11 +50,10 @@ export default function SecurityScreen() {
           <Button
             marginTop={12}
             backgroundColor="$blue9"
-            color="white"
             borderRadius={10}
             onPress={() => router.push("/screens/password")}
           >
-            Change Password
+            <Text color="white">Change Password</Text>
           </Button>
         </YStack>
 

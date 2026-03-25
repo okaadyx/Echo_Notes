@@ -1,9 +1,10 @@
+import { useNetInfo } from "@react-native-community/netinfo";
 import { queryClient } from "@/lib/QueryClient";
 import { api } from "@/services";
-import { Mic } from "@tamagui/lucide-icons";
+import { Mic, WifiOff } from "@tamagui/lucide-icons";
 import { router } from "expo-router";
 import * as SecureStore from "expo-secure-store";
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import Animated, {
   Easing,
   useAnimatedStyle,
@@ -13,9 +14,12 @@ import Animated, {
   withSequence,
   withTiming,
 } from "react-native-reanimated";
-import { Text, YStack } from "tamagui";
+import { Text, YStack, XStack } from "tamagui";
 
 export default function SplashScreen() {
+  const { isConnected } = useNetInfo();
+  const [isVerifying, setIsVerifying] = useState(false);
+  
   const scale = useSharedValue(0.8);
   const opacity = useSharedValue(0);
   const textOpacity = useSharedValue(0);
@@ -51,41 +55,61 @@ export default function SplashScreen() {
     transform: [{ translateY: textTranslateY.value }],
   }));
 
-  useEffect(() => {
-    const checkLogin = async () => {
-      // Minimum display time for splash screen (2.5 seconds)
-      const splashMinTime = new Promise((resolve) => setTimeout(resolve, 2500));
+  const checkLogin = useCallback(async () => {
+    if (isVerifying) return;
+    setIsVerifying(true);
 
-      try {
-        await splashMinTime; // Ensure splash shows for at least 2.5s
-        const token = await SecureStore.getItemAsync("token");
+    try {
+      const token = await SecureStore.getItemAsync("token");
 
-        if (!token) {
-          router.replace("/auth/login");
-          return;
-        }
+      if (!token) {
+        router.replace("/auth/login");
+        return;
+      }
 
-        const user = await api.user.getUser();
-        if (!user) {
-          await SecureStore.deleteItemAsync("token");
-          queryClient.invalidateQueries({
-            queryKey: ["user"],
-          });
-          router.replace("/auth/login");
+      // If we are offline, we just wait for connectivity listener to trigger this again
+      if (isConnected === false) {
+        setIsVerifying(false);
+        return;
+      }
 
-          return;
-        }
-        router.replace("/(tabs)");
-      } catch (error) {
+      const user = await api.user.getUser();
+      if (!user) {
         await SecureStore.deleteItemAsync("token");
         queryClient.invalidateQueries({
           queryKey: ["user"],
         });
         router.replace("/auth/login");
+        return;
       }
-    };
-    checkLogin();
-  }, []);
+      router.replace("/(tabs)");
+    } catch (error: any) {
+      // Handle explicit 401 Unauthorized errors
+      if (error.response?.status === 401) {
+        await SecureStore.deleteItemAsync("token");
+        queryClient.invalidateQueries({
+          queryKey: ["user"],
+        });
+        router.replace("/auth/login");
+        return;
+      }
+      
+      // If network error occurred during fetch, we'll let the isConnected listener handle it
+      console.log("Check login failed, likely network issue or server down", error.message);
+    } finally {
+      setIsVerifying(false);
+    }
+  }, [isConnected, isVerifying]);
+
+  useEffect(() => {
+    // Wait for splash animation minimum time
+    const timer = setTimeout(() => {
+      if (isConnected !== null) {
+        checkLogin();
+      }
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, [isConnected, checkLogin]);
 
   const loadingIndicatorStyle = useAnimatedStyle(() => ({
     transform: [
@@ -142,25 +166,48 @@ export default function SplashScreen() {
         </Animated.View>
 
         <YStack marginTop={50} alignItems="center">
-          <YStack
-            width={60}
-            height={4}
-            borderRadius={2}
-            backgroundColor="#6366f1"
-            overflow="hidden"
-          >
-            <Animated.View
-              style={[
-                {
-                  width: "40%",
-                  height: "100%",
-                  backgroundColor: "white",
-                  borderRadius: 2,
-                },
-                loadingIndicatorStyle,
-              ]}
-            />
-          </YStack>
+          {isConnected === false ? (
+            <XStack
+              backgroundColor="rgba(239, 68, 68, 0.1)"
+              paddingHorizontal={16}
+              paddingVertical={10}
+              borderRadius={12}
+              alignItems="center"
+              gap={10}
+              borderWidth={1}
+              borderColor="rgba(239, 68, 68, 0.2)"
+            >
+              <WifiOff size={18} color="#ef4444" />
+              <YStack>
+                <Text color="white" fontWeight="600" fontSize={14}>
+                  No Internet Connection
+                </Text>
+                <Text color="#94a3b8" fontSize={11}>
+                  Reconnecting automatically...
+                </Text>
+              </YStack>
+            </XStack>
+          ) : (
+            <YStack
+              width={60}
+              height={4}
+              borderRadius={2}
+              backgroundColor="#6366f1"
+              overflow="hidden"
+            >
+              <Animated.View
+                style={[
+                  {
+                    width: "40%",
+                    height: "100%",
+                    backgroundColor: "white",
+                    borderRadius: 2,
+                  },
+                  loadingIndicatorStyle,
+                ]}
+              />
+            </YStack>
+          )}
         </YStack>
       </YStack>
     </YStack>

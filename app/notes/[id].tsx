@@ -106,7 +106,7 @@ export default function PreviewComponent() {
         onDelete={handleDeleteNote}
       />
 
-      <ScrollView flex={1}>
+      <ScrollView flex={1} showsVerticalScrollIndicator={false}>
         <YStack padding={20} gap={24} paddingBottom={40}>
           <NoteInfo title={data.title} tags={data.tags} />
 

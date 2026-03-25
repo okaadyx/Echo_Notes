@@ -25,7 +25,10 @@ export default function HomeScreen() {
   return (
     <YStack flex={1} backgroundColor="$background">
       <SafeAreaView style={{ flex: 1 }}>
-        <ScrollView contentContainerStyle={{ padding: 16, gap: 10 }}>
+        <ScrollView 
+          contentContainerStyle={{ padding: 16, gap: 10 }}
+          showsVerticalScrollIndicator={false}
+        >
           <HeaderComponent />
           <SearchButton />
           <FolderComponent />

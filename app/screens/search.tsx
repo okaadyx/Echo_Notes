@@ -93,6 +93,7 @@ export default function SearchScreen() {
           />
         )}
         contentContainerStyle={{ gap: 10 }}
+        showsVerticalScrollIndicator={false}
       />
       <NoteOptionsModal
         visible={showOptions}

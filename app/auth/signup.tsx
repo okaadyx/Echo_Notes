@@ -41,7 +41,7 @@ export default function SignupScreen() {
 
   return (
     <YStack flex={1} backgroundColor="$background">
-      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }} showsVerticalScrollIndicator={false}>
         <YStack
           flex={1}
           justifyContent="center"

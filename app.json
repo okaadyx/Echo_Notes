@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "echo-notes",
+    "name": "Echo Notes",
     "slug": "echo-notes",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -19,7 +19,8 @@
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.okaady.echonotes"
     },
     "web": {
       "output": "static",
@@ -41,10 +42,15 @@
       ],
       "expo-secure-store"
     ],
-
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "49b3520b-2a49-4f22-9a01-e43dbaafe24b"
+      }
     }
   }
 }

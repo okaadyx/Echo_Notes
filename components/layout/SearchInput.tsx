@@ -1,7 +1,8 @@
+import { X } from "@tamagui/lucide-icons";
 import { setQuery } from "@/store/querySlice";
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Input, XStack } from "tamagui";
+import { Button, Input, XStack } from "tamagui";
 const SearchInput = () => {
   const inputRef = useRef<any>(null);
   const dispatch = useDispatch();
@@ -15,7 +16,7 @@ const SearchInput = () => {
   }, []);
 
   return (
-    <XStack flex={1} alignItems="center">
+    <XStack flex={1} alignItems="center" gap={10}>
       <Input
         ref={inputRef}
         value={query}
@@ -31,6 +32,16 @@ const SearchInput = () => {
         autoCapitalize="none"
         fontWeight="400"
       />
+      {query?.trim()?.length > 0 && (
+        <Button
+          size="$2"
+          circular
+          chromeless
+          icon={<X size={18} color="$gray10" />}
+          onPress={() => dispatch(setQuery(""))}
+          pressStyle={{ opacity: 0.5, backgroundColor: "$gray4" }}
+        />
+      )}
     </XStack>
   );
 };

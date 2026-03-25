@@ -26,7 +26,7 @@ export default function PreviewComponent({ note, audioUri, onSave }: Props) {
     <YStack flex={1} backgroundColor="$background" paddingTop={insets.top}>
       <NoteHeader />
 
-      <ScrollView flex={1}>
+      <ScrollView flex={1} showsVerticalScrollIndicator={false}>
         <YStack padding={20} gap={24}>
           <NoteInfo title={note.title} tags={note.tags} />
 
