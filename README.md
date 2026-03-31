@@ -6,6 +6,7 @@
 [![Tamagui](https://img.shields.io/badge/UI-Tamagui-FF6154.svg?style=flat-square&logo=tamagui&logoColor=white)](https://tamagui.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6.svg?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
+[![Download APK](https://img.shields.io/badge/Download-Android%20APK-3DDC84.svg?style=flat-square&logo=android&logoColor=white)](https://expo.dev/accounts/okaady/projects/echo-notes/builds/31d88b08-dfbf-42c3-9fd2-2c1d4a42430a)
 
 ---
 
@@ -81,6 +82,10 @@ EchoNotes follows a **feature-driven modular architecture** to ensure scalabilit
 ---
 
 ## 🚀 Getting Started
+
+### 📥 Download Android Build
+You can download the compiled Android APK directly to test the application:
+- **[Download EchoNotes APK](https://expo.dev/accounts/okaady/projects/echo-notes/builds/31d88b08-dfbf-42c3-9fd2-2c1d4a42430a)**
 
 ### Prerequisites
 - **Node.js**: LTS version (18.x or 20.x recommended)
