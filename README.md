@@ -1,23 +1,48 @@
-# EchoNotes 👋
+# 🎙️ EchoNotes
+> A production-grade, AI-powered voice note-taking application designed for elite efficiency. Capture raw audio and leverage Gemini AI to synthesize structured, actionable intelligence.
 
-[![Expo SDK 54](https://img.shields.io/badge/Expo-54.0-000020.svg?logo=expo&logoColor=white)](https://expo.dev/)
-[![React Native 0.81](https://img.shields.io/badge/React%20Native-0.81-61dafb.svg?logo=react&logoColor=black)](https://reactnative.dev/)
-[![Tamagui](https://img.shields.io/badge/UI-Tamagui-FF6154.svg?logo=tamagui&logoColor=white)](https://tamagui.dev/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6.svg?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-
-**EchoNotes** is a production-grade, AI-powered voice note-taking application designed for elite efficiency. It captures raw audio and leverages Gemini AI to synthesize structured, actionable intelligence—transforming scattered thoughts into organized success.
+[![Expo SDK 54](https://img.shields.io/badge/Expo-54.0-000020.svg?style=flat-square&logo=expo&logoColor=white)](https://expo.dev/)
+[![React Native 0.81](https://img.shields.io/badge/React%20Native-0.81-61dafb.svg?style=flat-square&logo=react&logoColor=black)](https://reactnative.dev/)
+[![Tamagui](https://img.shields.io/badge/UI-Tamagui-FF6154.svg?style=flat-square&logo=tamagui&logoColor=white)](https://tamagui.dev/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6.svg?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
 
 ---
 
 ## 📌 Overview
 
-EchoNotes exists to bridge the gap between spoken ideas and structured documentation. In a fast-paced world, typing is a bottleneck. EchoNotes allows users to record their voice and automatically receive high-quality transcripts, key point summaries, and Action items.
+**EchoNotes** bridges the gap between spoken ideas and structured documentation. In a fast-paced world, typing is a bottleneck. EchoNotes allows users to record their voice and automatically receive high-quality transcripts, key point summaries, and Action items.
 
 **Key Value Proposition:** 
 - **Efficiency**: Zero-effort structured notes from voice.
 - **Organization**: Clean, folder-based management with smart categorization.
 - **Intelligence**: Context-aware AI synthesis using Gemini.
+
+---
+
+## 📸 Application Flow
+
+A comprehensive look into the EchoNotes user experience:
+
+### Authentication & Onboarding
+| Splash | Login | Signup |
+| :---: | :---: | :---: |
+| <img src="./assets/screenshots/splash.jpeg" width="220" /> | <img src="./assets/screenshots/login.jpeg" width="220" /> | <img src="./assets/screenshots/signup.jpeg" width="220" /> |
+
+### Core Functionality
+| Home Dashboard | Voice Recorder | Note Details |
+| :---: | :---: | :---: |
+| <img src="./assets/screenshots/home.jpeg" width="220" /> | <img src="./assets/screenshots/recorder.jpeg" width="220" /> | <img src="./assets/screenshots/details.jpeg" width="220" /> |
+
+### Organization & Discovery
+| Note Library | Create Folder | Delete Folder |
+| :---: | :---: | :---: |
+| <img src="./assets/screenshots/library.jpeg" width="220" /> | <img src="./assets/screenshots/create%20folder.jpeg" width="220" /> | <img src="./assets/screenshots/delete%20%20folder.jpeg" width="220" /> |
+
+### Settings & Management
+| Smart Search | User Profile | Settings & Security |
+| :---: | :---: | :---: |
+| <img src="./assets/screenshots/search.jpeg" width="220" /> | <img src="./assets/screenshots/profile.jpeg" width="220" /> | <img src="./assets/screenshots/settings.jpeg" width="105" /><img src="./assets/screenshots/security.jpeg" width="105" /> |
 
 ---
 
@@ -161,7 +186,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 ## 📞 Support / Contact
 
 *Maintained by [Okaadyx](https://github.com/okaadyx)*
-- **Issue Tracker**: GitHub Issues or contact [support@okaadyx.com]
+- **Issue Tracker**: GitHub Issues or contact support@okaadyx.com
 
 ---
 *Built with ❤️ for better productivity.*
